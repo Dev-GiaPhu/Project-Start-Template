@@ -24,3 +24,4 @@ jobs:
         with:
           python-version: '3.11'
       - run: python3 tools/validate_context.py
+      - run: python3 -m unittest discover -s tests -p 'test_*.py' -v

@@ -51,8 +51,8 @@ def initialize(args) -> None:
     context = ROOT / "PROJECT_CONTEXT.md"
     text = context.read_text(encoding="utf-8")
     expected_lines = {
-        "- **Tên dự án:** Chưa khởi tạo — lấy từ \`PROJECT_CONFIG.json\`.": f"- **Tên dự án:** {args.name.strip()}.",
-        "- **Repository:** Chưa khởi tạo — lấy từ \`PROJECT_CONFIG.json\`.": f"- **Repository:** \`{args.repo}\`."
+        "- **Tên dự án:** Chưa khởi tạo — lấy từ `PROJECT_CONFIG.json`.": f"- **Tên dự án:** {args.name.strip()}.",
+        "- **Repository:** Chưa khởi tạo — lấy từ `PROJECT_CONFIG.json`.": f"- **Repository:** `{args.repo}`."
     }
     for old, new in expected_lines.items():
         if old not in text:
