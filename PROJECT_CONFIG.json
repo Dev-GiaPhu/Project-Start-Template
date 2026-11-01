@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "initialized": false,
+  "project_id": null,
+  "project_name": null,
+  "repository": null,
+  "project_type": "unspecified",
+  "technology_stack": [],
+  "timezone": "UTC",
+  "main_branch": "main",
+  "context_branch": "ai-context",
+  "memory_branch": "feature/ai-project-memory",
+  "memory_root": "AI-Memory",
+  "context_handoff": "PROJECT_CONTEXT.md",
+  "canonical_files": {
+    "working_rules": "AI_PROJECT_WORKING_RULES.md",
+    "status": "PROJECT_STATUS.md",
+    "roadmap": "PROJECT_ROADMAP.md",
+    "decisions": "DECISIONS.md"
+  },
+  "automatic_chat_capture_configured": false
+}

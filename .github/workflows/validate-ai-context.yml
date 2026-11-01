@@ -1,0 +1,26 @@
+name: Validate AI Context
+on:
+  push:
+    branches: ['ai-context']
+    paths:
+      - 'PROJECT_CONFIG.json'
+      - 'PROJECT_CONTEXT.md'
+      - 'AI_PROJECT_WORKING_RULES.md'
+      - 'PROJECT_STATUS.md'
+      - 'PROJECT_ROADMAP.md'
+      - 'DECISIONS.md'
+      - 'docs/**'
+      - 'tools/**'
+      - '.github/workflows/validate-ai-context.yml'
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 tools/validate_context.py
