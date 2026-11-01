@@ -1,0 +1,22 @@
+name: Validate AI Memory
+on:
+  push:
+    branches: ['feature/ai-project-memory']
+    paths:
+      - 'AI-Memory/**'
+      - '.github/workflows/validate-ai-memory.yml'
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate archive configuration
+        run: python3 AI-Memory/tools/validate_memory.py
+      - name: Test event archive and one-turn commit
+        run: python3 -m unittest discover -s AI-Memory/tests -p 'test_*.py' -v

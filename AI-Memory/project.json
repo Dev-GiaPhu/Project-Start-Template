@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "initialized": false,
+  "project_id": null,
+  "project_name": null,
+  "memory_repository": null,
+  "source_repository": null,
+  "memory_branch": "feature/ai-project-memory",
+  "main_branch": "main",
+  "context_branch": "ai-context",
+  "memory_root": "AI-Memory",
+  "archive_format": "append-only-jsonl+sha256-binary",
+  "timezone": "UTC",
+  "automatic_chat_capture_configured": false,
+  "per_turn_commit": {
+    "strategy": "one-completed-turn-one-commit",
+    "final_event": "message.completed",
+    "push": "non-force-verify-remote",
+    "adapter_configured": false
+  }
+}
