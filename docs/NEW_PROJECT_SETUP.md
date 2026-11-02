@@ -1,5 +1,14 @@
 # BẮT ĐẦU MỘT DỰ ÁN MỚI TỪ TEMPLATE
 
+## 0. Tạo dự án bằng **một file duy nhất** (cách sử dụng ưu tiên)
+
+- Trong chat mới, người dùng chỉ cần **gửi `ai-context/PROJECT_CONTEXT.md` từ repository template**; không cần viết prompt.
+- AI sẽ **hỏi tên game đầu tiên**, rồi hỏi đúng những thông tin tạo repo còn thiếu như owner, slug và Private/Public (mặc định Private).
+- AI kiểm tra quyền GitHub và tạo repository trực tiếp từ template **với `include_all_branches=true`** nếu công cụ hỗ trợ và người dùng đã xác nhận.
+- AI tự khởi tạo cấu hình trên `ai-context` và `feature/ai-project-memory` của repo mới; không đưa file AI lên `main`. Không yêu cầu người dùng làm thay những bước mà AI thực sự có công cụ thực hiện.
+- Nếu chưa có quyền/tính năng tạo repo, AI giải thích đúng trở ngại, cung cấp liên kết GitHub tạo từ template để người dùng thực hiện riêng bước đó và tiếp tục hỗ trợ khởi tạo.
+- **Đừng hứa tự ghi mọi cuộc chat:** một file hướng dẫn không thay được bộ ghi thu thập phản hồi sau final.
+
 ## 1. Tạo repository
 1. Chủ template bật **Settings → General → Template repository** trên repository nguồn (bước quản trị làm một lần).
 2. Vào repository mẫu → **Use this template → Create a new repository**.
