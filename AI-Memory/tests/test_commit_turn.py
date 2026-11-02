@@ -25,6 +25,7 @@ class TurnCommitTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.repo = Path(self.temp.name) / "project"
         self.repo.mkdir()
+        shutil.copyfile(SOURCE_TOOLS.parents[1] / ".gitignore", self.repo / ".gitignore")
         git(self.repo, "init")
         git(self.repo, "config", "user.name", "PAM Test")
         git(self.repo, "config", "user.email", "pam-test@example.invalid")
@@ -40,7 +41,7 @@ class TurnCommitTests(unittest.TestCase):
             "memory_repository": "example-owner/example-project",
             "memory_branch": "feature/ai-project-memory"
         }))
-        git(self.repo, "add", "AI-Memory/tools", "AI-Memory/project.json")
+        git(self.repo, "add", ".gitignore", "AI-Memory/tools", "AI-Memory/project.json")
         git(self.repo, "commit", "-m", "Initial test fixture")
         sys.path.insert(0, str(tools))
         from event_store import create_session, append_event
@@ -108,6 +109,17 @@ class TurnCommitTests(unittest.TestCase):
         self.record_turn("turn-2")
         self.assertEqual(self.close("turn-2").returncode, 0)
         self.assertEqual(len(git(self.repo, "log", "--format=%s", "--", f"AI-Memory/{self.relative}").splitlines()), 2)
+
+    def test_two_distinct_sessions_can_commit_in_sequence(self):
+        self.record_turn("turn-a")
+        first = self.close("turn-a")
+        self.assertEqual(first.returncode, 0, first.stderr)
+        self.session = self.create_session(self.root, "codex", "Second session")
+        self.relative = self.session.relative_to(self.root).as_posix()
+        self.record_turn("turn-b")
+        second = self.close("turn-b")
+        self.assertEqual(second.returncode, 0, second.stderr)
+        self.assertEqual(git(self.repo, "log", "--format=%s").count("memory(turn):"), 2)
 
     def test_reject_credential_in_payload(self):
         self.record_turn()

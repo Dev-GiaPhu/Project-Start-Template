@@ -41,3 +41,14 @@ coverage/
 __pycache__/
 
 # Add project-specific build/cache paths after selecting a technology stack.
+
+# AI memory recorder's ephemeral lock files; never commit them.
+AI-Memory/conversations/**/.writer.lock
+
+# Exports may contain multiple private chats and credentials; never stage them accidentally.
+AI-Memory/imports/**
+!AI-Memory/imports/.gitkeep
+
+# Temporary atomic-write or local program caches.
+AI-Memory/**/.tmp-*
+AI-Memory/**/*.tmp-*
