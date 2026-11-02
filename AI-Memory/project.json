@@ -30,7 +30,13 @@
     "adapter_code_available": true,
     "host_connected": false,
     "automatic_capture_available": false,
-    "per_member_paths": "AI-Memory/members/<member_id>/conversations/"
+    "per_member_paths": "AI-Memory/members/<member_id>/conversations/",
+    "mode": "direct_git_connector",
+    "external_host_required": false
   },
-  "member_capture_status": "adapter-code-installed-not-connected"
+  "member_capture_status": "prototype_not_in_use",
+  "capture_policy_current": "direct_github_connector_during_active_chat",
+  "requires_external_host": false,
+  "external_host_adapter_status": "not_in_use",
+  "automatic_chat_capture": false
 }
