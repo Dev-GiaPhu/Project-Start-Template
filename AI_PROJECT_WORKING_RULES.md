@@ -56,6 +56,16 @@
 - Bộ ghi trong `AI-Memory/tools/member_capture.py` có gateway nội bộ `host_gateway.py`; chỉ được tuyên bố **ĐÃ ĐỒNG BỘ** sau khi remote SHA xác minh. GitHub connector, prompt hoặc việc có script **không tự cung cấp hook ChatGPT**. Muốn có dữ liệu ngay từ tin bàn giao đầu tiên, host phải chạy và test *trước khi* gửi.
 - `AI-Memory/tools/commit_turn.py` là công cụ **legacy**, không còn là chính sách mặc định; không cần xóa log cũ hay rewrite lịch sử để chuyển đổi. Quy tắc quyền ghi, bảo vệ `main`, dữ liệu nhạy cảm và chủ dự án duyệt thay đổi lớn vẫn giữ nguyên.
 
+## 7A. ƯU TIÊN LƯU TRỰC TIẾP BẰNG GITHUB CONNECTOR — KHÔNG DỰNG HOST MỚI (ĐÍNH CHÍNH 02/11/2026)
+
+**Chỉ đạo mới nhất của chủ dự án:** Không sử dụng host/server/webhook/adapter/dịch vụ thứ ba bổ sung để ghi chat. Khi kết nối GitHub sẵn có và quyền ghi hợp lệ, **AI trong chính lượt chat này trực tiếp lưu nguyên văn thông điệp user ngay khi thấy và có thể ghi**, sau đó lưu văn bản phản hồi AI thực sự chuẩn bị gửi. Không làm phức tạp hệ thống lưu chỉ hai chiều hỏi/đáp.
+
+- **Ưu tiên thực hành ngay:** Vừa nhận file bàn giao đầu tiên, tự nạp chính xác project/nhánh và kiểm tra quyền; khi hợp lệ ghi user message ngay qua GitHub, rồi đọc GDD/Context liên quan, soạn và ghi phản hồi AI đã chuẩn bị. Ghi đúng repository, nhánh `feature/ai-project-memory`; không ghi `main`, `ai-context` hay nhánh của dự án khác. Không tự tạo thành viên/owner cho tin nhắn chưa được xác thực. Mỗi tin nhắn có nhãn user/assistant, ngày/ID có nguồn, quan hệ và trạng thái.
+- **Độ trung thực:** Tin nhắn user nhìn thấy được có thể lưu `message.created`; phản hồi AI được commit trước khi phát hành chỉ ghi `message.prepared` (và giữ nguyên văn nội dung dự kiến phát hành), **không** giả có callback `message.completed`. Chỉ báo đã lưu sau khi commit/push và xác minh SHA trên GitHub. Khi thiếu dữ liệu nguồn, ghi `partial`, tuyệt đối không bịa metadata hay lịch sử.
+- **Không tự chạy nền:** GitHub connector cho AI làm việc trong cuộc chat đang xử lý, **không tự lắng nghe các chat/lượt mới, không đảm bảo nhận phản hồi sau final, không tạo thông báo ở chat chưa mở**. Khi chat mới được mở và file bàn giao được nạp lại, AI thực hiện quy trình trực tiếp từ đầu. Không quảng cáo `automatic_chat_capture=true` nếu chưa có khả năng nền tảng thật.
+- **Không sử dụng kiến trúc bổ sung:** Các file thử nghiệm `AI-Memory/tools/member_capture.py`, `host_gateway.py` và `docs/MEMBER_CAPTURE.md` trước đây không nằm trong luồng được yêu cầu; **không khởi chạy hoặc đòi cấu hình chúng**. Chỉ dọn bỏ sau khi có quyền/xác nhận riêng về file và dữ liệu để tránh xóa nhầm.
+- **Ưu tiên lời sửa mới:** Điều khoản này thay thế mọi đề xuất trước đó bắt buộc cài host/adapter trước khi có thể lưu nội dung chat bằng GitHub connector. Không thay đổi quy tắc bảo vệ `main`, bảo mật, phân quyền member và owner-only approval.
+
 ## 8. BÀN GIAO & TÁI SỬ DỤNG
 - **Một file bàn giao duy nhất: `ai-context/PROJECT_CONTEXT.md`**; người dùng không phải viết thêm prompt. Nó tự dẫn đến Rules, Status, Roadmap, Decisions và Memory.
 - Khởi tạo mỗi dự án mới từ template bằng `Include all branches`. Không mang dữ liệu riêng của dự án cũ vào template hay dự án mới.
