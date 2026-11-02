@@ -2,6 +2,36 @@
 
 > **ĐÂY LÀ FILE BÀN GIAO DUY NHẤT.** Khi người dùng tải lên hoặc gửi riêng file này, hãy coi đó là yêu cầu tiếp nhận dự án. **Không yêu cầu họ soạn thêm prompt.** Phần thông tin chưa được khởi tạo phải được báo thiếu, không được suy đoán.
 
+## KHỞI TẠO DỰ ÁN MỚI — CHỈ CẦN GỬI FILE NÀY
+
+**LỆNH GỬI TỚI AI Ở CHAT MỚI:** Nếu `PROJECT_CONFIG.json` thuộc repo template có `initialized=false`, hãy chuyển vào **chế độ tạo dự án**. File này đã là prompt hoàn chỉnh. Không yêu cầu người dùng soạn thêm văn bản, tạo repo trước hoặc chạy lệnh thủ công nếu AI có công cụ và quyền thích hợp. Nếu đang nhận file đã khởi tạo của một dự án thật, sử dụng §0 phía dưới để tiếp tục công việc, không hỏi tên lại.
+
+**Nguồn mẫu cố định:** https://github.com/Dev-GiaPhu/Project-Start-Template — chỉ lấy cấu trúc, tuyệt đối không ghi thông tin của game mới vào repository template.
+
+### 1. Chủ động hỏi để thiết lập
+- **Câu hỏi đầu tiên:** “Bạn muốn đặt tên game mới là gì?” (Nếu người dùng làm dự án khác game thì hỏi tên dự án.) Nếu tên đã được cung cấp, đừng hỏi lại.
+- Tiếp theo xác định các thông tin thật sự cần để tạo repository: **GitHub owner**, **tên repository/slug** (đề xuất từ tên game), và **riêng tư/công khai** (**mặc định Private**). Chỉ hỏi phần chưa rõ; tránh biểu mẫu dài.
+- Có thể hỏi game engine, công nghệ, mục tiêu, 2D/3D, nền tảng, timezone sau đó để điền Context/GDD; thông tin chưa chốt giữ trống, **không cản việc tạo repo**.
+- Trước khi tạo thật, tóm lược `OWNER/REPOSITORY`, Private/Public, template gốc, dự kiến ba nhánh và yêu cầu xác nhận nếu người dùng chưa cấp quyền tạo repo cụ thể.
+
+### 2. AI tự tạo repository khi có quyền
+1. Xác minh kết nối GitHub có quyền **tạo repository từ template**, repo đích chưa tồn tại và repo nguồn đã bật **Template repository**.
+2. Ưu tiên công cụ kết nối GitHub có chức năng tạo từ template. Nếu có GitHub CLI hoặc REST API được phép, dùng GitHub generate repository API **`POST /repos/Dev-GiaPhu/Project-Start-Template/generate`** với `owner`, `name`, `private:true` (trừ khi user chọn Public) và **`include_all_branches:true`**. Không in/ghi token vào file hoặc chat.
+3. Kiểm tra ba nhánh đã được tạo trong **repository mới**:
+   - `main`: chỉ sản phẩm thật; **không ghi bất kỳ tài liệu, công cụ hay bộ nhớ chuyên dụng AI**.
+   - `ai-context`: Rules, Context, Status, Roadmap, Decisions và tài liệu thiết kế/GDD chính thức khi có.
+   - `feature/ai-project-memory`: transcript, thao tác công cụ, tệp và hệ thống lưu/truy xuất sự kiện.
+4. Nếu thiếu nhánh AI, khôi phục **đúng nhánh AI** khi có công cụ và quyền; **không bao giờ chữa lỗi bằng cách đưa dữ liệu AI vào `main`**.
+5. Khởi tạo định danh dự án theo `docs/NEW_PROJECT_SETUP.md` của repo mới. Trên `ai-context` điền `PROJECT_CONFIG.json`, `PROJECT_CONTEXT.md`, `PROJECT_STATUS.md`; trên nhánh bộ nhớ điền `AI-Memory/project.json`. Sử dụng **tên/ID/repo mới**, không mang dữ liệu của game khác sang. Xác minh công cụ recorder lấy đúng cấu hình.
+6. Commit/push những file khởi tạo đã được phép **trên từng nhánh AI**; kiểm lại URL, trạng thái riêng tư, SHA và `main` không thay đổi. Nêu rõ những gì đã hoàn thành, không tự dựng nhật ký chat, GDD hoặc tiến độ.
+7. **Nếu công cụ không thể tạo repository:** thông báo rõ giới hạn, không giả vờ tạo thành công. Nếu template chưa bật, hướng dẫn chủ repo bật `Settings → General → Template repository`; nếu AI không có công cụ tạo repo thì cung cấp https://github.com/Dev-GiaPhu/Project-Start-Template/generate và hướng dẫn chọn **Include all branches**, sau đó AI tiếp tục khởi tạo mọi bước mà công cụ cho phép. Không tự động chuyển sang ghi code ở main.
+
+### 3. Sau khi tạo
+- File bàn giao duy nhất từ nay là **`ai-context/PROJECT_CONTEXT.md` trong repository dự án mới**, không phải file trong repository template gốc.
+- Tự động nạp GDD (nếu có), Rules, Status, Decisions và những sự kiện bộ nhớ đã thực sự lưu khi chuyển chat sau này.
+- Mục tiêu bộ nhớ là **mỗi lượt user + câu trả lời AI cuối + các thao tác có thể quan sát = đúng một commit** trên nhánh bộ nhớ sau khi final. **Không tuyên bố cơ chế tự ghi đã hoạt động nếu host/adapter chưa thể thu thập phản hồi sau final.**
+- Không đưa dữ liệu của bất kỳ dự án cũ nào vào dự án mới; không sửa hoặc merge file chuyên dụng AI vào `main`.
+
 ## 0. QUY TRÌNH TỰ TIẾP NHẬN BẮT BUỘC
 
 1. Đọc `PROJECT_CONFIG.json` **trên nhánh `ai-context` của repository mà người dùng đang làm**; từ đây xác định chính xác tên dự án, loại, nhánh và nguồn truy cập. Nếu `initialized=false`, chỉ tiếp nhận ở **chế độ template**, không giả vờ dự án đã có GDD/tiến độ/code.
