@@ -1,0 +1,12 @@
+# CODEOWNERS cho nhánh ai-context của TEMPLATE.
+# CHỈ LÀ GỢI Ý REVIEW cho tới khi owner bật GitHub branch protection
+# + require code owner review và hạn chế AI connector bypass.
+# Khi tạo dự án mới thuộc owner khác, PHẢI thay login bên dưới trước khi mở quyền member.
+/AI_PROJECT_WORKING_RULES.md @Dev-GiaPhu
+/PROJECT_CONTEXT.md @Dev-GiaPhu
+/PROJECT_CONFIG.json @Dev-GiaPhu
+/DECISIONS.md @Dev-GiaPhu
+/TEAM/MEMBERS.json @Dev-GiaPhu
+/.github/CODEOWNERS @Dev-GiaPhu
+/docs/SECURITY_AND_AUTHORIZATION.md @Dev-GiaPhu
+/docs/NEW_PROJECT_SETUP.md @Dev-GiaPhu
