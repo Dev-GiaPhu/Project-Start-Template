@@ -20,9 +20,9 @@
 ## 3. Thiết lập GitHub cần owner thực hiện (không dùng dịch vụ thứ ba)
 
 1. Trong repo template **và từng repo mới**: Settings → Rules → Rulesets (hoặc Branch protection) tạo rule cho `ai-context`, yêu cầu pull request với kiểm soát review phù hợp, chặn direct push, force push, xóa nhánh, và vô hiệu hóa bypass cho actor AI.
-2. Tách danh tính GitHub có quyền sửa file nhạy cảm của owner khỏi credential mà ChatGPT connector được phép dùng. **Nếu connector dùng đúng tài khoản GitHub owner có quyền bypass, không có đảm bảo độc lập.** Tốt nhất AI chỉ tạo nhánh/PR, owner thao tác review/merge trong GitHub web bằng session độc lập; hạn chế credential AI theo quyền cần thiết.
+2. Tách danh tính GitHub có quyền sửa file nhạy cảm của owner khỏi credential mà ChatGPT connector được phép dùng. **Nếu connector dùng đúng tài khoản GitHub owner có quyền bypass, không có đảm bảo độc lập.** Tốt nhất AI chỉ cập nhật nhánh PR hiện có hoặc gửi bản vá, owner thao tác review/merge trong GitHub web bằng phiên độc lập; hạn chế credential AI theo quyền cần thiết.
 3. `.github/CODEOWNERS` ở `ai-context` kê khai owner mong đợi cho Rules/Context/Config/roster/Decisions. **CODEOWNERS không có hiệu lực bắt buộc nếu chưa bật require code owner review** và bảo vệ nhánh. Khi clone template sang repo thuộc owner khác, thay `@Dev-GiaPhu` bằng tài khoản owner thật **trước** khi cho member ghi.
-4. `main`: bảo vệ độc lập; không merge `ai-context` hoặc memory vào main. Memory: bảo vệ non-force push, review quyền chia sẻ transcript, kiểm secrets, kiểm đúng repo nhánh.
+4. Mọi nhánh sản phẩm quan trọng (bao gồm `main`, `develop`, nhánh phát hành): áp dụng bảo vệ thích hợp; không merge `ai-context` hoặc memory vào bất kỳ nhánh sản phẩm nào. Memory: bảo vệ non-force push, review quyền chia sẻ transcript, kiểm secrets, kiểm đúng repo nhánh.
 5. Không coi trạng thái `ai-context` đã bảo vệ nếu API không đọc được. Lưu bằng chứng settings hoặc API của người quản trị; tài khoản kết nối hiện tại có thể trả 403 dù repo permissions.admin=true.
 
 ## 3A. MỖI THÀNH VIÊN LÀ MỘT TÀI KHOẢN RIÊNG
