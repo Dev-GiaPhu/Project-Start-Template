@@ -1,5 +1,15 @@
 # PROJECT CONTEXT — TỰ TIẾP NHẬN DỰ ÁN KHI BẮT ĐẦU CHAT MỚI
 
+## HỘP THƯ CHỜ CHỦ DỰ ÁN — ĐỌC NGAY KHI NHẬN FILE BÀN GIAO (02/11/2026)
+
+Đây là **mẫu quản trị chung**; không được gán tiến độ, thành viên hoặc dữ liệu Zimbo.exe cho dự án mới. Khi đã khởi tạo repo mới, AI phải kiểm tra các vấn đề chờ owner trong Project Context dự án đó ngay từ chat đầu; nếu xác thực người chat là owner thì chủ động báo dù không được nhắc, còn member không có quyền phê duyệt. Chỉ thay đổi nhỏ không mâu thuẫn mới được tự cập nhật theo `AI_PROJECT_WORKING_RULES.md` §9.
+
+- **TEMPLATE-OWNER-001 — CHỜ CHỦ TEMPLATE DUYỆT:** Template hiện dùng chiến lược bộ nhớ `one-completed-turn-one-commit` và chưa có adapter tự động (`automatic_chat_capture_configured=false`). Nếu mục tiêu mới là ghi ngay từng tin nhắn, phải chủ template duyệt thay đổi chính sách/schema/bộ ghi và test end-to-end trước khi công bố hỗ trợ. Không tự coi code CLI hiện có là ChatGPT auto-capture.
+- **MỌI DỰ ÁN MỚI — CHƯA XÁC MINH:** Khi nhận file bàn giao đầu tiên, kiểm tra adapter/hook thực tế, định danh owner/member, quyền ghi và khả năng ghi user message + assistant final; chưa có bằng chứng push/SHA thì nói rõ `CHƯA HOẠT ĐỘNG/CHƯA ĐỒNG BỘ`, không gắn nhãn sẵn sàng. Muốn tự động lưu ngay tin nhắn bàn giao đầu tiên thì adapter phải được cài và test trước khi gửi tin nhắn ấy.
+
+Khi giải quyết xong yêu cầu template, đánh dấu quyết định và trạng thái kiểm thử có nguồn; không chép nguyên vấn đề của template thành việc còn chờ của từng dự án mới nếu đã giải quyết.
+
+
 > **ĐÂY LÀ FILE BÀN GIAO DUY NHẤT.** Khi người dùng tải lên hoặc gửi riêng file này, hãy coi đó là yêu cầu tiếp nhận dự án. **Không yêu cầu họ soạn thêm prompt.** Phần thông tin chưa được khởi tạo phải được báo thiếu, không được suy đoán.
 
 ## KHỞI TẠO DỰ ÁN MỚI — CHỈ CẦN GỬI FILE NÀY
