@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0",
+  "initialized": false,
+  "project_id": null,
+  "owner_member_id": null,
+  "members": [],
+  "note": "Template không có member mặc định. Chủ dự án mới khởi tạo roster, host cấp token tương ứng; không mang danh tính từ Zimbo.exe."
+}
