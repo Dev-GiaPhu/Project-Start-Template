@@ -16,6 +16,21 @@
     "strategy": "one-completed-turn-one-commit",
     "final_event": "message.completed",
     "push": "non-force-verify-remote",
-    "adapter_configured": false
-  }
+    "adapter_configured": false,
+    "deprecated": true,
+    "legacy_only": true
+  },
+  "per_message_commit": {
+    "strategy": "one_message_one_commit",
+    "target": "memory_branch",
+    "commit_user_message_immediately": true,
+    "wait_for_assistant_final_before_saving_user_message": false,
+    "final_requires_host_published": true,
+    "push": "non-force-verify-remote",
+    "adapter_code_available": true,
+    "host_connected": false,
+    "automatic_capture_available": false,
+    "per_member_paths": "AI-Memory/members/<member_id>/conversations/"
+  },
+  "member_capture_status": "adapter-code-installed-not-connected"
 }
