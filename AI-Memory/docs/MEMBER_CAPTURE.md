@@ -1,3 +1,5 @@
+> **KHÔNG SỬ DỤNG — PHƯƠNG ÁN LỊCH SỬ:** Chủ dự án đã loại bỏ host/server/webhook bên ngoài. Phương án được dùng là lưu trực tiếp qua GitHub connector trong từng lượt chat có quyền. File này chỉ giữ để đối chiếu lịch sử, không phải hướng dẫn bắt buộc. Xem Rules trên ai-context, mục ưu tiên lưu trực tiếp.
+
 # Bộ ghi host theo từng thành viên — hướng dẫn tích hợp và nghiệm thu
 
 **Trạng thái:** Mã bộ ghi đã được đưa vào nhánh memory và đã qua các phép thử Git remote mô phỏng; **CHƯA** có ChatGPT host callback thực tế được kết nối. Không tuyên bố mọi tin nhắn trên ChatGPT hiện đang tự đồng bộ.
