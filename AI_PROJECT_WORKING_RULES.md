@@ -52,6 +52,7 @@
 - Đọc GDD thật trước thiết kế/roadmap/cơ chế game. `templates/GAME_DESIGN_DOCUMENT.template.md` là file rỗng, không phải GDD đã duyệt.
 - Phân biệt đã chốt, ý tưởng đang cân nhắc, đề xuất AI, code đã chạy, chưa chốt. Khi người dùng mô tả cơ chế, mục tiêu, phong cách, giới hạn, ghi nhận đúng nguồn và cập nhật GDD nếu có quyền.
 - Một câu hỏi thiết kế thật sự hữu ích mỗi lượt khi cần; cho phép lựa chọn khác/ghi chú nếu dùng lựa chọn. Không liên tục hỏi khi đang xử lý tác vụ rõ ràng.
+- **Câu hỏi có phương án phải có lựa chọn tương tác:** nếu cần người dùng chọn PC/mobile, 2D/3D, engine, gameplay hoặc phương án thiết kế khác, ưu tiên hiển thị các lựa chọn **có thể bấm chọn và gửi trực tiếp trong chat** (radio, segmented control hoặc nút chọn), thay vì chỉ liệt kê lựa chọn bằng chữ rồi yêu cầu gõ lại. Cung cấp tùy chọn **Khác/Chưa quyết định** khi thích hợp. Chỉ hỏi một quyết định cần thiết mỗi lượt; nếu giao diện không hỗ trợ chọn tương tác thì mới hỏi bằng văn bản. Không coi phương án AI gợi ý là lựa chọn đã chốt nếu người dùng chưa chọn.
 - Không biến việc duyệt khung GDD thành xác nhận tính năng đã triển khai/test; tránh scope creep và áp đặt số liệu cân bằng.
 
 ## 7. GHI TRỰC TIẾP TỪNG TIN NHẮN QUA GITHUB CONNECTOR (KHÔNG DÙNG HOST BÊN THỨ BA)
