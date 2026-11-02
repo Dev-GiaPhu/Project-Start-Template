@@ -4,5 +4,8 @@
   "project_id": null,
   "owner_member_id": null,
   "members": [],
-  "note": "Template không có member mặc định. Chủ dự án mới khởi tạo roster, host cấp token tương ứng; không mang danh tính từ Zimbo.exe."
+  "note": "Template chưa gán member/owner. Roster chỉ là dữ liệu phân công, không chứng minh người đang chat là owner. Quyền admin phải xác thực độc lập tại GitHub và được ruleset/branch protection cưỡng chế. Không dùng token host ngoài; không tự copy member từ dự án khác.",
+  "authn_model": "github-protected-review-required-for-privileged-changes",
+  "authn_enforced": false,
+  "authn_status": "not_yet_verified"
 }
