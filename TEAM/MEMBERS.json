@@ -1,11 +1,31 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "initialized": false,
   "project_id": null,
   "owner_member_id": null,
   "members": [],
-  "note": "Template chưa gán member/owner. Roster chỉ là dữ liệu phân công, không chứng minh người đang chat là owner. Quyền admin phải xác thực độc lập tại GitHub và được ruleset/branch protection cưỡng chế. Không dùng token host ngoài; không tự copy member từ dự án khác.",
+  "note": "Mẫu không gán member sẵn; khi khởi tạo owner thiết lập roster và xác minh Github user ID. Đăng nhập ChatGPT của từng người là riêng biệt, GitHub connector không có phép chứng minh chéo các tài khoản ChatGPT. Không lưu token/password vào repository.",
   "authn_model": "github-protected-review-required-for-privileged-changes",
   "authn_enforced": false,
-  "authn_status": "not_yet_verified"
+  "authn_status": "not_yet_verified",
+  "owner_github_user_id": null,
+  "member_identity_policy": {
+    "chatgpt_account": "one_unique_personal_account_per_member_not_shared",
+    "github_account": "one_unique_personal_account_per_member_not_shared",
+    "github_identity_source": "authenticated_connector.get_profile.id",
+    "membership_validation": "match_member_roster_and_repo_collaborator_permission",
+    "role_assignment": "owner_approved_roster_plus_github_enforced_repository_permissions",
+    "chatgpt_identity_validation": "not_available_via_github_connector; do not claim cross-system identity is technically verified",
+    "unknown_identity": "unattributed",
+    "owner_approval": "independent_verified_github_review_when_privileged"
+  },
+  "member_fields": {
+    "member_id": "stable unique slug per member",
+    "github_user_id": "immutable GitHub user id, required when initialized",
+    "github_login": "human-readable GitHub login; can change",
+    "display_name": "optional",
+    "role": "owner | member",
+    "status": "active | suspended",
+    "chatgpt_account": "separate per member; do not store ChatGPT credential or expose email"
+  }
 }
