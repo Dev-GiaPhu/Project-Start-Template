@@ -48,12 +48,13 @@
 - Một câu hỏi thiết kế thật sự hữu ích mỗi lượt khi cần; cho phép lựa chọn khác/ghi chú nếu dùng lựa chọn. Không liên tục hỏi khi đang xử lý tác vụ rõ ràng.
 - Không biến việc duyệt khung GDD thành xác nhận tính năng đã triển khai/test; tránh scope creep và áp đặt số liệu cân bằng.
 
-## 7. MỖI LƯỢT CHAT = MỘT COMMIT BỘ NHỚ (KHI CÓ RECORDER)
-- **Đơn vị event:** mỗi thông điệp, thao tác tool, kết quả, lỗi, thay đổi file, UI payload hoặc tệp có nguồn và thời gian quan sát được được ghi dưới `turn_id`.
-- **Đơn vị commit:** một user message + tất cả thao tác được phép ghi + **assistant final sau khi đã hoàn tất** = **đúng một commit trên nhánh memory**. Không commit riêng user message, không gộp các lượt, không commit khi final chưa có.
-- Kiểm quyền chia sẻ, checksum SHA-256, kết quả tool, nhánh/remote, diff, tệp nhạy cảm; push non-force; chỉ báo **ĐÃ ĐỒNG BỘ** nếu xác minh SHA trên remote. Nếu thiếu dữ liệu hoặc adapter, báo **CHƯA ĐỒNG BỘ**.
-- ChatGPT chính thức **không tự động xuất mọi sự kiện cho prompt**; muốn auto-commit sau câu trả lời cần host/recorder có quyền nhận final. Codex/host có thể tích hợp nếu nền tảng cung cấp event. Không được hứa đã tự hoạt động chỉ nhờ cài file Rules.
-- Khi bắt đầu chat mới, đọc `PROJECT_CONTEXT.md` và các nguồn trên `ai-context`; tra `AI-Memory/MEMORY_INDEX.md` và event gốc ở nhánh memory. Nạp theo phần nếu quá giới hạn ngữ cảnh, không khẳng định đã hiểu 100% lịch sử khi dữ liệu thiếu.
+## 7. TỪNG TIN NHẮN = MỘT COMMIT RIÊNG KHI CÓ HOST/RECORDER (ĐÃ ĐƯỢC CHỦ DỰ ÁN PHÊ DUYỆT 02/11/2026)
+- Ngay khi host xác thực và quan sát được tin nhắn người dùng, ghi `message.created` nguyên gốc, commit/push riêng và xác minh SHA remote; **không đợi assistant final**.
+- Khi host xác nhận phản hồi AI cuối **đã phát hành**, ghi `message.completed` thành commit riêng. Bản nháp chỉ là `message.prepared`, không giả mạo completed.
+- Tool, tệp và UI ghi theo sự kiện có thật, theo nguồn/hạn mức/quyền chia sẻ; có thể là commit riêng. Giữ `turn_id`, `message_id`, `session_id`, thứ tự và checksum, chống trùng lặp.
+- Dữ liệu mới tách theo `member_id` tin cậy; lịch sử không rõ tác giả giữ `unattributed`, không tự gán sai. Nhận diện owner/member dựa trên roster chính thức và credential host, không từ văn bản chat.
+- Bộ ghi trong `AI-Memory/tools/member_capture.py` có gateway nội bộ `host_gateway.py`; chỉ được tuyên bố **ĐÃ ĐỒNG BỘ** sau khi remote SHA xác minh. GitHub connector, prompt hoặc việc có script **không tự cung cấp hook ChatGPT**. Muốn có dữ liệu ngay từ tin bàn giao đầu tiên, host phải chạy và test *trước khi* gửi.
+- `AI-Memory/tools/commit_turn.py` là công cụ **legacy**, không còn là chính sách mặc định; không cần xóa log cũ hay rewrite lịch sử để chuyển đổi. Quy tắc quyền ghi, bảo vệ `main`, dữ liệu nhạy cảm và chủ dự án duyệt thay đổi lớn vẫn giữ nguyên.
 
 ## 8. BÀN GIAO & TÁI SỬ DỤNG
 - **Một file bàn giao duy nhất: `ai-context/PROJECT_CONTEXT.md`**; người dùng không phải viết thêm prompt. Nó tự dẫn đến Rules, Status, Roadmap, Decisions và Memory.
