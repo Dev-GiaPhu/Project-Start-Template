@@ -9,6 +9,23 @@
 - Không giả định nội dung dự án khác; mọi file template chỉ chứa khung, không phải trạng thái thật.
 - Giữ nguyên API, tham chiếu, chức năng đang chạy; không làm lại một hệ thống chỉ vì thấy mã trên GitHub khác bản local.
 
+
+## 1A. ĐỌC RULES, PHẠM VI GHI VÀ TIẾP NHẬN BÀN GIAO
+
+1. Trước khi đề xuất, thay đổi, kiểm thử hoặc ghi nhận kết quả của bất kỳ nhiệm vụ nào, AI phải đọc đầy đủ Rules hiện hành của dự án trên nhánh ngữ cảnh chính thức. Không dùng phần đã nhớ hoặc chỉ đọc một đoạn thay cho bản mới nhất.
+2. Nếu người dùng gửi PROJECT_CONTEXT.md hoặc hồ sơ bàn giao tương đương, đó là một bàn giao công việc đang tiếp tục. Sau khi đọc Rules, AI phải nạp đúng repository, nhánh, nguồn và bước tiếp theo được ghi trong hồ sơ; không yêu cầu prompt khởi động bổ sung, không hỏi lại tên dự án hoặc đầu việc đã có chỉ vì tin nhắn hiện tại không lặp lại.
+3. Công việc tiếp tục được thực hiện dưới tài khoản GitHub đang kết nối. Chỉ gán thành viên khi tài khoản GitHub khớp roster hoặc có bằng chứng hợp lệ; không suy diễn danh tính ChatGPT từ GitHub login.
+4. Các yêu cầu tra cứu, so sánh, rà soát, phân tích hoặc báo cáo trạng thái mà không yêu cầu thay đổi là **chỉ đọc**. Không tự sửa file, commit, push, tạo PR, đổi nhánh hoặc thực hiện hành động ghi khác. Nếu phát hiện vấn đề, báo rõ và chỉ sửa khi người dùng giao phạm vi sửa.
+5. Nếu hành vi cần thực hiện chưa được Rules quy định và việc tự chọn có thể làm thay đổi phạm vi, AI phải dừng trước hành động đó, nêu khoảng trống và cập nhật/đề xuất bổ sung Rules theo quyền được giao; không tự lấp khoảng trống bằng giả định.
+
+
+## 1B. NGÔN NGỮ TÀI LIỆU AI
+
+1. Mọi văn xuôi, mô tả, phân tích, quyết định thiết kế, nhãn trạng thái, ghi chú bàn giao và câu hỏi mới trong tài liệu nội bộ dành cho AI phải viết bằng tiếng Việt có dấu, trừ khi người dùng yêu cầu ngôn ngữ khác.
+2. Được giữ nguyên tên file, đường dẫn, repository/nhánh, commit/SHA, code, API, class/method/field, kiểu dữ liệu, lệnh, tên asset, log và thuật ngữ kỹ thuật khi cần chính xác.
+3. Khi giữ nguyên câu tiếng Anh làm bằng chứng, kèm diễn giải tiếng Việt nếu cần; không dịch làm sai code, log hoặc tên kỹ thuật.
+4. Khi chuẩn hóa ngôn ngữ tài liệu cũ, không tự rút gọn, xóa hoặc thay đổi quyết định, số liệu, điều kiện, ngoại lệ hay trạng thái kiểm thử.
+
 ## 2. PHÂN LOẠI NHÁNH — KHÔNG GIỚI HẠN NHÁNH CODE SẢN PHẨM
 
 **Ba nhánh nòng cốt khi khởi tạo không phải giới hạn số nhánh của người dùng.** Chủ dự án và thành viên có quyền GitHub được tự tạo thêm nhiều nhánh sản phẩm phục vụ chức năng, sửa lỗi, thử nghiệm hoặc phát hành, phù hợp với nhánh đang làm, quyền repo và chính sách merge.
@@ -52,8 +69,16 @@
 - Đọc GDD thật trước thiết kế/roadmap/cơ chế game. `templates/GAME_DESIGN_DOCUMENT.template.md` là file rỗng, không phải GDD đã duyệt.
 - Phân biệt đã chốt, ý tưởng đang cân nhắc, đề xuất AI, code đã chạy, chưa chốt. Khi người dùng mô tả cơ chế, mục tiêu, phong cách, giới hạn, ghi nhận đúng nguồn và cập nhật GDD nếu có quyền.
 - Một câu hỏi thiết kế thật sự hữu ích mỗi lượt khi cần; cho phép lựa chọn khác/ghi chú nếu dùng lựa chọn. Không liên tục hỏi khi đang xử lý tác vụ rõ ràng.
-- **Câu hỏi có phương án phải có lựa chọn tương tác:** nếu cần người dùng chọn PC/mobile, 2D/3D, engine, gameplay hoặc phương án thiết kế khác, ưu tiên hiển thị các lựa chọn **có thể bấm chọn và gửi trực tiếp trong chat** (radio, segmented control hoặc nút chọn), thay vì chỉ liệt kê lựa chọn bằng chữ rồi yêu cầu gõ lại. Cung cấp tùy chọn **Khác/Chưa quyết định** khi thích hợp. Chỉ hỏi một quyết định cần thiết mỗi lượt; nếu giao diện không hỗ trợ chọn tương tác thì mới hỏi bằng văn bản. Không coi phương án AI gợi ý là lựa chọn đã chốt nếu người dùng chưa chọn.
+- **Câu hỏi có phương án phải có lựa chọn tương tác:** nếu cần người dùng chọn PC/mobile, 2D/3D, engine, gameplay hoặc phương án thiết kế khác, ưu tiên hiển thị các lựa chọn **có thể bấm chọn và gửi trực tiếp trong chat** (radio, segmented control hoặc nút chọn), thay vì chỉ liệt kê lựa chọn bằng chữ rồi yêu cầu gõ lại. Cung cấp tùy chọn **Khác/Chưa quyết định** khi thích hợp. Luôn cho phép **Ghi chú thêm tự do** để người dùng sửa, nêu ngoại lệ hoặc đưa phương án riêng. Chỉ hỏi một quyết định cần thiết mỗi lượt; nếu giao diện không hỗ trợ chọn tương tác thì mới hỏi bằng văn bản. Không coi phương án AI gợi ý là lựa chọn đã chốt nếu người dùng chưa chọn.
 - Không biến việc duyệt khung GDD thành xác nhận tính năng đã triển khai/test; tránh scope creep và áp đặt số liệu cân bằng.
+
+### RÀ SOÁT GDD KHÔNG ĐỒNG NGHĨA TỰ CHỐT
+
+- Các yêu cầu như “hoàn thiện GDD nếu chưa đủ”, “kiểm tra GDD còn thiếu gì” hoặc cách diễn đạt tương đương trước hết là yêu cầu rà soát và hỏi các quyết định còn thiếu, không phải quyền tự điền thông số hoặc tự chốt gameplay.
+- Không tự chọn giá trị cho mục đang mở, không biến đề xuất AI thành quyết định và không commit phần bổ sung thiết kế nếu người dùng chưa trả lời hoặc chưa cho phép rõ ràng việc tạo baseline đề xuất.
+- Khi phát hiện khoảng trống, ưu tiên hỏi một quyết định thiết kế có ảnh hưởng cao mỗi lượt. Chỉ sau khi người dùng xác nhận mới cập nhật GDD, Decisions, Config hoặc tài liệu phụ thuộc.
+- Nếu được phép soạn đề xuất, mọi nội dung phải gắn nhãn ĐỀ XUẤT CHƯA DUYỆT và không được ghi như luật đã chốt.
+
 
 ## 7. GHI TRỰC TIẾP TỪNG TIN NHẮN QUA GITHUB CONNECTOR (KHÔNG DÙNG HOST BÊN THỨ BA)
 - Trong một lượt chat có kết nối GitHub thực sự, nếu đã xác định đúng dự án, phạm vi quyền và repo, AI lưu **tin user nguyên văn** trên `feature/ai-project-memory` bằng thao tác GitHub hiện có; một tin nhắn một commit. Sau khi soạn câu trả lời, AI có thể ghi nội dung dự kiến gửi với nhãn `message.prepared` thành commit khác. Chỉ ghi `message.completed` nếu có xác nhận sự kiện đã phát hành. Không lưu dữ liệu bị ẩn hoặc chưa được cung cấp.
