@@ -26,6 +26,16 @@
 3. Khi giữ nguyên câu tiếng Anh làm bằng chứng, kèm diễn giải tiếng Việt nếu cần; không dịch làm sai code, log hoặc tên kỹ thuật.
 4. Khi chuẩn hóa ngôn ngữ tài liệu cũ, không tự rút gọn, xóa hoặc thay đổi quyết định, số liệu, điều kiện, ngoại lệ hay trạng thái kiểm thử.
 
+
+### 1.4. GIỮ NGUYÊN PHẠM VI CÔNG VIỆC ĐANG HOẠT ĐỘNG
+
+1. Khi cuộc trò chuyện đang xử lý một loại công việc cụ thể như GDD, code, kiểm thử, roadmap, status, memory hoặc review, các yêu cầu tiếp theo như “tiếp tục làm việc” được hiểu là tiếp tục đúng loại công việc và phạm vi đó.
+2. Không tự chuyển từ GDD sang Roadmap, Status, code, asset, kiểm thử hoặc công việc khác chỉ vì tài liệu có bước kế tiếp, roadmap có mốc chưa làm, hoặc AI thấy một việc khác có vẻ thuận tiện hơn.
+3. Nếu đang làm GDD, AI phải tiếp tục rà soát các mục thiết kế còn thiếu và hỏi quyết định thiết kế cần thiết; không tự tạo roadmap, viết code hoặc cập nhật trạng thái triển khai.
+4. Chỉ chuyển phạm vi khi người dùng nói rõ muốn chuyển, hoặc khi phạm vi hiện tại đã hoàn tất/bị chặn và người dùng giao phạm vi mới.
+5. Nếu hồ sơ bàn giao, roadmap hoặc đề xuất trước đó khác với phạm vi người dùng đang xử lý, yêu cầu mới nhất trong cuộc trò chuyện có ưu tiên; phải nêu xung đột nếu việc chuyển phạm vi là cần thiết để tránh sửa nhầm.
+
+
 ## 2. PHÂN LOẠI NHÁNH — KHÔNG GIỚI HẠN NHÁNH CODE SẢN PHẨM
 
 **Ba nhánh nòng cốt khi khởi tạo không phải giới hạn số nhánh của người dùng.** Chủ dự án và thành viên có quyền GitHub được tự tạo thêm nhiều nhánh sản phẩm phục vụ chức năng, sửa lỗi, thử nghiệm hoặc phát hành, phù hợp với nhánh đang làm, quyền repo và chính sách merge.
